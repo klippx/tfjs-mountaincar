@@ -2,12 +2,9 @@
 
 ## Overview
 
-This is a modification of [this tensorflow.js subrepository](https://github.com/tensorflow/tfjs-examples/tree/master/cart-pole), by [@Caisq](https://github.com/caisq), to tackle the OpenAI's gym MountainCar problem:
-  https://github.com/openai/gym/blob/master/gym/envs/classic_control/mountain_car.py
+This is a modification of [this tensorflow.js subrepository](https://github.com/prouhard/tfjs-mountaincar/tree/master), by [@prouhard](https://github.com/prouhard)
 
-
-For a more graphical illustration of the problem, see:
-  http://gym.openai.com/envs/MountainCar-v0/
+It has been converted to TS to more easily understand what is going on.
 
 ### Features:
 
@@ -22,5 +19,6 @@ For a more graphical illustration of the problem, see:
 ## Usage
 
 ```sh
-yarn && yarn watch
+npm install
+npm run serve
 ```
