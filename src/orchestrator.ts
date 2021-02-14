@@ -19,6 +19,7 @@ export class Orchestrator {
   private discountRate: number
   private rewardStore: Array<number>
   public maxPositionStore: Array<number>
+  private stopRequested: () => boolean
 
   /**
    * @param {MountainCar} mountainCar
@@ -32,7 +33,8 @@ export class Orchestrator {
     model: Model,
     memory: Memory,
     discountRate: number,
-    maxStepsPerGame: number
+    maxStepsPerGame: number,
+    stopRequested: () => boolean
   ) {
     // The main components of the environment
     this.mountainCar = mountainCar
@@ -50,6 +52,7 @@ export class Orchestrator {
     // Initialization of the rewards and max positions containers
     this.rewardStore = new Array()
     this.maxPositionStore = new Array()
+    this.stopRequested = stopRequested
   }
 
   /**
@@ -76,7 +79,7 @@ export class Orchestrator {
     let totalReward = 0
     let maxPosition = -100
     let step = 0
-    while (step < this.maxStepsPerGame) {
+    while (step < this.maxStepsPerGame && this.stopRequested() === false) {
       // Rendering in the browser
       await maybeRenderDuringTraining(this.mountainCar)
 

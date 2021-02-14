@@ -54,11 +54,12 @@ class PolicyNetwork {
     cartPoleSystem: MountainCar,
     discountRate: number,
     numGames: number,
-    maxStepsPerGame: number
+    maxStepsPerGame: number,
+    stopRequested: () => boolean
   ) {
     const maxPositionStore: Array<number> = new Array()
     onGameEnd(0, numGames)
-    for (let i = 0; i < numGames; ++i) {
+    for (let i = 0; i < numGames && stopRequested() === false; ++i) {
       // Randomly initialize the state of the cart-pole system at the beginning
       // of every game.
       const orchestrator = new Orchestrator(
@@ -66,7 +67,8 @@ class PolicyNetwork {
         this.model,
         this.memory,
         discountRate,
-        maxStepsPerGame
+        maxStepsPerGame,
+        stopRequested
       )
       await orchestrator.run()
       maxPositionStore.push(

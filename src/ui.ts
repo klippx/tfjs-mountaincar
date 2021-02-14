@@ -280,6 +280,7 @@ export async function setUpUI() {
 
   trainButton.addEventListener('click', async () => {
     if (trainButton.textContent === 'Stop') {
+      logStatus('Stopping...')
       stopRequested = true
     } else {
       disableModelControls()
@@ -319,7 +320,8 @@ export async function setUpUI() {
           mountainCar,
           discountRate,
           gamesPerIteration,
-          maxStepsPerGame
+          maxStepsPerGame,
+          () => stopRequested
         )
         maxPositionValues.push({ x: i + 1, y: maxPosition })
         bestPosition.textContent = `Best position was ${maxPosition}`
